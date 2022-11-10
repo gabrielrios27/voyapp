@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
 		padding: 10,
 		borderBottomWidth: 1,
 		borderBottomColor: '#014ba0',
+		color: 'white',
 	},
 
 	listContainer: {
@@ -53,5 +54,28 @@ export const styles = StyleSheet.create({
 		fontSize: 14,
 		color: '#014ba0',
 		paddingHorizontal: 10,
+	},
+	modalDelete: {
+		width: '80%',
+		height: '30%',
+	},
+	modalMessage: {
+		marginTop: 10,
+		marginBottom: 10,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	modalMessageTextValue: {
+		fontSize: 16,
+		color: '#014bb7',
+	},
+	modalMessageTextQuestion: {
+		fontSize: 16,
+		color: '#014bb7',
+	},
+	modalButtonContainer: {
+		marginTop: 10,
+		flexDirection: 'row-reverse',
+		justifyContent: 'space-evenly',
 	},
 });
