@@ -25,7 +25,12 @@ export const styles = StyleSheet.create({
 		borderBottomColor: '#014ba0',
 		color: 'white',
 	},
-
+	inputAlert: {
+		color: '#D34A29',
+		position: 'absolute',
+		bottom: 40,
+		left: 20,
+	},
 	listContainer: {
 		marginHorizontal: 20,
 	},
@@ -35,29 +40,35 @@ export const styles = StyleSheet.create({
 		marginBottom: 10,
 		color: '#d9d5d5',
 	},
+	listItemTouchableOpacity: {
+		marginVertical: 5,
+		color: 'white',
+		activeOpacity: 0.9,
+	},
 	listItemContainer: {
 		paddingVertical: 20,
 		backgroundColor: '#d9d5d5',
 		borderRadius: 5,
-		shadowColor: '#fff',
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.25,
-		shadowRadius: 3.84,
-		elevation: 5,
 		justifyContent: 'center',
-		marginVertical: 5,
 	},
 	listItem: {
 		fontSize: 14,
 		color: '#014ba0',
 		paddingHorizontal: 10,
+		margin: 0,
+	},
+	modalContainer: {
+		height: '100%',
+		justifyContent: 'center',
 	},
 	modalDelete: {
-		width: '80%',
-		height: '30%',
+		backgroundColor: '#f5f5f5',
+		paddingTop: 20,
+		paddingBottom: 30,
+		paddingLeft: 20,
+		paddingRight: 20,
+		justifyContent: 'center',
+		margin: 20,
 	},
 	modalMessage: {
 		marginTop: 10,

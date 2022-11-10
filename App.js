@@ -10,13 +10,22 @@ export default function App() {
 	const [itemList, setItemList] = useState([]);
 
 	const [itemSelected, setItemSelected] = useState({});
-	const [modalVisible, setModalVisible] = useState(true);
+	const [modalVisible, setModalVisible] = useState(false);
+	const [alertEmptyInput, setAlertEmptyInput] = useState(false);
 
-	const onHandlerChangeItem = (item) => setTextItem(item);
+	const onHandlerChangeItem = (item) => {
+		if (alertEmptyInput) {
+			setAlertEmptyInput(false);
+		}
+		setTextItem(item);
+	};
 	const addItem = () => {
-		setItemList((currentItems) => [...currentItems, { id: Math.random().toString(), value: textItem }]);
-		setTextItem('');
-		console.log('lista: ', itemList);
+		if (textItem === '') {
+			setAlertEmptyInput(true);
+		} else {
+			setItemList((currentItems) => [...currentItems, { id: Math.random().toString(), value: textItem }]);
+			setTextItem('');
+		}
 	};
 	const onHandlerDelete = (id) => {
 		setItemList((currentItems) => currentItems.filter((item) => item.id !== id));
@@ -27,19 +36,24 @@ export default function App() {
 		setItemSelected(itemList.filter((item) => item.id === id)[0]);
 		setModalVisible(!modalVisible);
 	};
+	const onHandlerCancelModal = () => {
+		setItemSelected({});
+		setModalVisible(!modalVisible);
+	};
 	return (
 		<View style={styles.container}>
 			<ImageBackground source={require('./assets/HD-wallpaper-purple.jpg')} resizeMode="cover" style={styles.image}>
 				<View style={styles.inputContainer}>
 					<TextInput style={styles.input} onChangeText={onHandlerChangeItem} value={textItem} />
 					<Button title="Agregar" color="#1466c3" onPress={addItem} />
+					{alertEmptyInput ? <Text style={styles.inputAlert}>Debe escribir una tarea</Text> : ''}
 				</View>
 				<View style={styles.listContainer}>
 					<Text style={styles.listTitle}>Todo List</Text>
 					<FlatList
 						data={itemList}
 						renderItem={(data) => (
-							<TouchableOpacity onPress={() => {}}>
+							<TouchableOpacity activeOpacity={0.5} style={styles.listItemTouchableOpacity} onPress={onHandlerModal.bind(this, data.item.id)}>
 								<View style={styles.listItemContainer}>
 									<Text style={styles.listItem}>{data.item.value}</Text>
 								</View>
@@ -48,16 +62,20 @@ export default function App() {
 						keyExtractor={(item) => item.id}
 					/>
 				</View>
-				<Modal animationType="fade" visible={modalVisible} style={styles.modalDelete}>
-					<View style={styles.modalMessage}>
-						<Text style={styles.modalMessageTextValue}>Está por borrar la tarea: {itemSelected.value} </Text>
-					</View>
-					<View style={styles.modalMessage}>
-						<Text style={styles.modalMessageTextQuestion}>¿Está seguro que desea borrar?</Text>
-					</View>
-					<View style={styles.modalButtonContainer}>
-						<Button title="Confirmar" color="#1466c3" onPress={addItem} style={styles.modalButton} />
-						<Button title="Cancelar" color="#D34A29" onPress={addItem} style={styles.modalButton} />
+				<Modal animationType="fade" visible={modalVisible} transparent={true}>
+					<View style={styles.modalContainer}>
+						<View style={styles.modalDelete}>
+							<View style={styles.modalMessage}>
+								<Text style={styles.modalMessageTextValue}>Está por borrar la tarea: {itemSelected.value} </Text>
+							</View>
+							<View style={styles.modalMessage}>
+								<Text style={styles.modalMessageTextQuestion}>¿Está seguro que desea borrar?</Text>
+							</View>
+							<View style={styles.modalButtonContainer}>
+								<Button title="Confirmar" color="#1466c3" onPress={onHandlerDelete.bind(this, itemSelected.id)} style={styles.modalButton} />
+								<Button title="Cancelar" color="#D34A29" onPress={onHandlerCancelModal} style={styles.modalButton} />
+							</View>
+						</View>
 					</View>
 				</Modal>
 			</ImageBackground>
