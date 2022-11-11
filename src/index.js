@@ -1,8 +1,9 @@
 import { Button, FlatList, ImageBackground, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
+import AddItem from './components/index';
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { styles } from './styles';
+import { styles } from '../styles';
 import { useState } from 'react';
 
 export default function App() {
@@ -42,12 +43,8 @@ export default function App() {
 	};
 	return (
 		<View style={styles.container}>
-			<ImageBackground source={require('./assets/HD-wallpaper-purple.jpg')} resizeMode="cover" style={styles.image}>
-				<View style={styles.inputContainer}>
-					<TextInput style={styles.input} onChangeText={onHandlerChangeItem} value={textItem} />
-					<Button title="Agregar" color="#1466c3" onPress={addItem} />
-					{alertEmptyInput ? <Text style={styles.inputAlert}>Debe escribir una tarea</Text> : ''}
-				</View>
+			<ImageBackground source={require('./../assets/HD-wallpaper-purple.jpg')} resizeMode="cover" style={styles.image}>
+				<AddItem textItem={textItem} addItem={addItem} onHandlerChangeItem={onHandlerChangeItem} />
 				<View style={styles.listContainer}>
 					<Text style={styles.listTitle}>Todo List</Text>
 					<FlatList

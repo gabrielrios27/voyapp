@@ -4,6 +4,11 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 	},
+	image: {
+		width: '100%',
+		height: '100%',
+		justifyContent: 'flex-start',
+	},
 	inputContainer: {
 		width: '100%',
 		paddingVertical: 70,
@@ -11,11 +16,6 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-	},
-	image: {
-		width: '100%',
-		height: '100%',
-		justifyContent: 'flex-start',
 	},
 	input: {
 		width: '70%',
