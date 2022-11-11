@@ -1,9 +1,9 @@
+import { AddItem, Item } from './components/index';
 import { Button, FlatList, ImageBackground, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-import AddItem from './components/index';
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { styles } from '../styles';
+import { styles } from './styles';
 import { useState } from 'react';
 
 export default function App() {
@@ -12,52 +12,33 @@ export default function App() {
 
 	const [itemSelected, setItemSelected] = useState({});
 	const [modalVisible, setModalVisible] = useState(false);
-	const [alertEmptyInput, setAlertEmptyInput] = useState(false);
 
-	const onHandlerChangeItem = (item) => {
-		if (alertEmptyInput) {
-			setAlertEmptyInput(false);
-		}
-		setTextItem(item);
-	};
+	const onHandlerChangeItem = (item) => setTextItem(item);
 	const addItem = () => {
-		if (textItem === '') {
-			setAlertEmptyInput(true);
-		} else {
-			setItemList((currentItems) => [...currentItems, { id: Math.random().toString(), value: textItem }]);
-			setTextItem('');
-		}
+		setItemList((currentItems) => [...currentItems, { id: Math.random().toString(), value: textItem }]);
+		setTextItem('');
 	};
 	const onHandlerDelete = (id) => {
 		setItemList((currentItems) => currentItems.filter((item) => item.id !== id));
 		setItemSelected({});
 		setModalVisible(!modalVisible);
 	};
-	const onHandlerModal = (id) => {
-		setItemSelected(itemList.filter((item) => item.id === id)[0]);
+	const onHandlerModal = (item) => {
+		setItemSelected(item);
 		setModalVisible(!modalVisible);
 	};
 	const onHandlerCancelModal = () => {
 		setItemSelected({});
 		setModalVisible(!modalVisible);
 	};
+	const renderItem = ({ item }) => <Item item={item} onHandlerModal={onHandlerModal} />;
 	return (
 		<View style={styles.container}>
 			<ImageBackground source={require('./../assets/HD-wallpaper-purple.jpg')} resizeMode="cover" style={styles.image}>
 				<AddItem textItem={textItem} addItem={addItem} onHandlerChangeItem={onHandlerChangeItem} />
 				<View style={styles.listContainer}>
 					<Text style={styles.listTitle}>Todo List</Text>
-					<FlatList
-						data={itemList}
-						renderItem={(data) => (
-							<TouchableOpacity activeOpacity={0.5} style={styles.listItemTouchableOpacity} onPress={onHandlerModal.bind(this, data.item.id)}>
-								<View style={styles.listItemContainer}>
-									<Text style={styles.listItem}>{data.item.value}</Text>
-								</View>
-							</TouchableOpacity>
-						)}
-						keyExtractor={(item) => item.id}
-					/>
+					<FlatList data={itemList} renderItem={renderItem} keyExtractor={(item) => item.id} />
 				</View>
 				<Modal animationType="fade" visible={modalVisible} transparent={true}>
 					<View style={styles.modalContainer}>
