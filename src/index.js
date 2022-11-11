@@ -1,4 +1,4 @@
-import { AddItem, Item } from './components/index';
+import { AddItem, Item, List, ModalDelete } from './components/index';
 import { Button, FlatList, ImageBackground, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import React from 'react';
@@ -36,11 +36,8 @@ export default function App() {
 		<View style={styles.container}>
 			<ImageBackground source={require('./../assets/HD-wallpaper-purple.jpg')} resizeMode="cover" style={styles.image}>
 				<AddItem textItem={textItem} addItem={addItem} onHandlerChangeItem={onHandlerChangeItem} />
-				<View style={styles.listContainer}>
-					<Text style={styles.listTitle}>Todo List</Text>
-					<FlatList data={itemList} renderItem={renderItem} keyExtractor={(item) => item.id} />
-				</View>
-				<Modal animationType="fade" visible={modalVisible} transparent={true}>
+				<List itemList={itemList} renderItem={renderItem} />
+				{/* <Modal animationType="fade" visible={modalVisible} transparent={true}>
 					<View style={styles.modalContainer}>
 						<View style={styles.modalDelete}>
 							<View style={styles.modalMessage}>
@@ -55,7 +52,13 @@ export default function App() {
 							</View>
 						</View>
 					</View>
-				</Modal>
+				</Modal> */}
+				<ModalDelete
+					modalVisible={modalVisible}
+					itemSelected={itemSelected}
+					onHandlerDelete={onHandlerDelete}
+					onHandlerCancelModal={onHandlerCancelModal}
+				/>
 			</ImageBackground>
 		</View>
 	);
