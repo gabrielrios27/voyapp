@@ -1,14 +1,17 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 
 import { styles } from './styles';
 
 const Item = ({ onHandlerModal, item }) => {
 	return (
-		<TouchableOpacity activeOpacity={0.5} style={styles.listItemTouchableOpacity} onPress={() => onHandlerModal(item)}>
-			<View style={styles.listItemContainer}>
+		<View style={styles.listItemContainer}>
+			<TouchableOpacity activeOpacity={0.5} style={styles.listItemTouchableOpacity} onPress={() => onHandlerModal(item)}>
 				<Text style={styles.listItem}>{item.value}</Text>
-			</View>
-		</TouchableOpacity>
+			</TouchableOpacity>
+			<TouchableHighlight style={styles.listCheck} activeOpacity={0.6} underlayColor="#DDDDDD" onPress={() => console.warn('Pressed!')}>
+				<Text style={styles.listCheckIco}>Ok</Text>
+			</TouchableHighlight>
+		</View>
 	);
 };
 
