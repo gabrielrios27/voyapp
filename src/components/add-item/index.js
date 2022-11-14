@@ -7,7 +7,7 @@ const AddItem = ({ textItem, addItem, onHandlerChangeItem }) => {
 	return (
 		<View style={styles.inputContainer}>
 			<TextInput style={styles.input} value={textItem} onChangeText={onHandlerChangeItem} placeholder="Ingrese una tarea" />
-			<Button title="Agregar" color="#1466c3" onPress={addItem} disabled={!textItem} />
+			<Button title="Agregar" color="#003ce5" onPress={addItem} disabled={!textItem} />
 		</View>
 	);
 };

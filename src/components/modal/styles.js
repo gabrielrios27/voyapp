@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
 		paddingRight: 20,
 		justifyContent: 'center',
 		margin: 20,
+		borderRadius: 10,
 	},
 	modalMessage: {
 		marginTop: 10,

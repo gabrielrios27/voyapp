@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 	},
 	listItemTouchableOpacity: {
 		marginVertical: 5,
-		width: '80%',
+		width: '82%',
 		activeOpacity: 0.9,
 	},
 	listItem: {
@@ -21,11 +21,19 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 		margin: 0,
 	},
+	btnRipple: {},
 	listCheck: {
-		backgroundColor: '#521CCD',
-		padding: 15,
 		borderRadius: 30,
 		marginLeft: 15,
+		width: 45,
+		height: 45,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
-	listCheckIco: { color: 'grey' },
+	listCheckDone: {
+		backgroundColor: '#f0bb0f',
+	},
+	listCheckUndone: {
+		backgroundColor: '#003ce5',
+	},
 });

@@ -12,10 +12,11 @@ export default function App() {
 
 	const [itemSelected, setItemSelected] = useState({});
 	const [modalVisible, setModalVisible] = useState(false);
+	const [doneItemsList, setDoneItemsList] = useState([]);
 
 	const onHandlerChangeItem = (item) => setTextItem(item);
 	const addItem = () => {
-		setItemList((currentItems) => [...currentItems, { id: Math.random().toString(), value: textItem }]);
+		setItemList((currentItems) => [...currentItems, { id: Math.random().toString(), value: textItem, done: false }]);
 		setTextItem('');
 	};
 	const onHandlerDelete = (id) => {
@@ -31,7 +32,12 @@ export default function App() {
 		setItemSelected({});
 		setModalVisible(!modalVisible);
 	};
-	const renderItem = ({ item }) => <Item item={item} onHandlerModal={onHandlerModal} />;
+	const onHandlerDoneItem = (doneItem) => {
+		doneItem.done = !doneItem.done;
+		setItemList((currentItems) => currentItems.map((item) => (item.id === doneItem.id ? doneItem : item)));
+	};
+
+	const renderItem = ({ item }) => <Item item={item} onHandlerModal={onHandlerModal} onHandlerDoneItem={onHandlerDoneItem} />;
 	return (
 		<View style={styles.container}>
 			<ImageBackground source={require('./../assets/HD-wallpaper-purple.jpg')} resizeMode="cover" style={styles.image}>
