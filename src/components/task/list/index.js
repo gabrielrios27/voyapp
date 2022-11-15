@@ -48,5 +48,4 @@ const List = ({ itemList, renderItem }) => {
 		</View>
 	);
 };
-
 export default List;
