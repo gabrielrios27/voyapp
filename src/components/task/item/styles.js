@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 		margin: 0,
 	},
-	btnRipple: {},
 	listCheck: {
 		borderRadius: 30,
 		marginLeft: 15,
